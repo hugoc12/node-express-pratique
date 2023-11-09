@@ -1,8 +1,10 @@
-import { Router } from 'express';
+import express, { Router } from 'express';
+
 import ControllerHouses from '../controller/ControllerHouses.js';
 
 import multer from "multer";
 import path from 'node:path';
+import { fileURLToPath } from 'url';
 
 const uploadThumbnail = multer({ //Middleware para receber arquivos.
     storage: multer.diskStorage({
@@ -20,10 +22,12 @@ const uploadThumbnail = multer({ //Middleware para receber arquivos.
 
 const routerHouses = new Router();
 
-routerHouses.route('/houses')
-    .get(ControllerHouses.index);
 
-routerHouses.route('/house')
+routerHouses.route('/houses')
+    .get(ControllerHouses.index)
     .post(uploadThumbnail.single('thumbnail'), ControllerHouses.store);
+
+routerHouses.route('/house/:id')
+    .delete(ControllerHouses.delete);
 
 export default routerHouses;

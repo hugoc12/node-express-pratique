@@ -19,7 +19,7 @@ class ControllerHouses{
 
             let houseCreate = await House.create({
                 owner:idUser,
-                thumbnail:thumbnail.path,
+                thumbnail:thumbnail.filename,
                 description,
                 location:{
                     rua,
@@ -35,6 +35,17 @@ class ControllerHouses{
             return response.json(houseCreate);
         }catch(err){
             return response.send(`ERRO - ${err}`);
+        }
+    }
+
+    async delete(request, response){
+        try{
+            let idHouse = request.params.id;
+            let houseDelete = await House.findByIdAndDelete(idHouse);
+            console.log(houseDelete);
+            return response.send('House deleted!');
+        }catch(err){
+            return response.send(`ERROR: ${err}`);
         }
     }
 }

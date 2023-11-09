@@ -9,7 +9,17 @@ const HouseSchema = new Schema({
     description:String,
     location:Map,
     price:Number,
-    status:Boolean
+    status:Boolean,
+}, {
+    toJSON:{
+        virtuals:true,
+    }
+}
+)
+
+//VARIÁVEL PREDEFINIDA NO SCHEMA
+HouseSchema.virtual('thumbnail_url').get(function(){
+    return `http:localhost:3333/files/${this.thumbnail}`
 })
 
 export default model('House', HouseSchema);
