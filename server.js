@@ -17,7 +17,7 @@ server.use('/files',
 )
 
 server.use(
-    express.json(), // Para atender requests de body type json
+    express.json(), // Para atender requests com type json(body)
     routerUsers,
     routerSessions,
     routerHouses

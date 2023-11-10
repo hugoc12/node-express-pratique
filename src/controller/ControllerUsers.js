@@ -52,7 +52,7 @@ class ControllerUsers {
         }
     }
 
-    async updateId(request, response) {
+    async updateId(request, response) { // ATUALIZAR DADOS DE USUÁRIO
         try{
             let id = request.params.id;
             let data = request.body;

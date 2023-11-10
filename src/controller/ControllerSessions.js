@@ -1,7 +1,7 @@
 import Session from "../models/Session.js";
 
 class ControllerSessions{
-    async index(request, response){
+    async index(request, response){ // LISTAR SESSÕES
         try{
             let listSessions = await Session.find();
             return response.json(listSessions);
@@ -10,7 +10,7 @@ class ControllerSessions{
         }
     }
 
-    async store(request, response){
+    async store(request, response){ // REGISTRAR SESSÃO
         try{
             let id = request.params.id;
             let token = request.params.token;

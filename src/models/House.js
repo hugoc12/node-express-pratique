@@ -18,8 +18,8 @@ const HouseSchema = new Schema({
 )
 
 //VARIÁVEL PREDEFINIDA NO SCHEMA
-HouseSchema.virtual('thumbnail_url').get(function(){
-    return `http:localhost:3333/files/${this.thumbnail}`
+HouseSchema.virtual('thumbnail_url').get(function(){ // OBS.: NÃO PODEMOS UTILIZAR ARROW FUNCION
+    return `http://localhost:3333/files/${this.thumbnail}`
 })
 
 export default model('House', HouseSchema);

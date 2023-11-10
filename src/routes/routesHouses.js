@@ -25,9 +25,11 @@ const routerHouses = new Router();
 
 routerHouses.route('/houses')
     .get(ControllerHouses.index)
-    .post(uploadThumbnail.single('thumbnail'), ControllerHouses.store);
+    .post(uploadThumbnail.single('thumbnail'), ControllerHouses.store)
 
 routerHouses.route('/house/:id')
-    .delete(ControllerHouses.delete);
+    .get(ControllerHouses.indexId)
+    .delete(ControllerHouses.delete)
+    .put(uploadThumbnail.single('thumbnail'), ControllerHouses.updateId)
 
 export default routerHouses;
