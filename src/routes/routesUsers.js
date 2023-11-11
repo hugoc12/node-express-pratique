@@ -9,5 +9,6 @@ routerUsers.route('/users') //REQUESTS TO COLLECTION/TABLE - (NOSQL/SQL)
 routerUsers.route('/user/:id') //REQUESTS TO DUCUMENT/LINE - (NOSQL/SQL)
     .get(ControllerUsers.indexId)
     .put(ControllerUsers.updateId)
+    .delete(ControllerUsers.deleteUser)
 
 export default routerUsers;

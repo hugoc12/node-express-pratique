@@ -23,6 +23,15 @@ class ControllerSessions{
             return response.send(`${err}`);
         }
     }
+
+    async logout(request, response){
+        try{
+            let sessionLogout = await Session.findByIdAndDelete(request.params.id);
+            return response.json(`LOGOUT SUCESS - ${sessionLogout}`);
+        }catch(err){
+            return response.send(`ERR - ${err}`);
+        }
+    }
 }
 
 export default new ControllerSessions;

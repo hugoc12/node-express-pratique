@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import routerUsers from "./src/routes/routesUsers.js";
 import routerSessions from "./src/routes/routesSessions.js";
 import routerHouses from "./src/routes/routesHouses.js";
+import routerReservas from "./src/routes/routesReservas.js";
 
 const server = express();
 
@@ -20,7 +21,8 @@ server.use(
     express.json(), // Para atender requests com type json(body)
     routerUsers,
     routerSessions,
-    routerHouses
+    routerHouses,
+    routerReservas
 );
 
 

@@ -4,7 +4,10 @@ import mongoose from "mongoose";
 class ControllerHouses {
     async index(request, response) {
         try {
-            let listHouses = await House.find();
+            let idUser = request.headers.iduser;
+            let listHouses = (await House.find()).filter((el)=>{
+                return el.owner != idUser && el.status;
+            });
             return response.json(listHouses);
         } catch (err) {
             return response.send(`ERROR - ${err}`);
@@ -22,7 +25,7 @@ class ControllerHouses {
 
     async store(request, response) {
         try {
-            let idUser = new mongoose.Types.ObjectId(request.header.userId);
+            let idUser = new mongoose.Types.ObjectId(request.headers.iduser);
             let { description, rua, numero, bairro, cep, cidade, estado, price, status } = request.body;
             let thumbnail = request.file
 
@@ -60,9 +63,11 @@ class ControllerHouses {
     async updateId(request, response) {
         try {
             let { description, rua, numero, bairro, cep, cidade, estado, price, status } = request.body;
+            let userId = new mongoose.Types.ObjectId(request.headers.iduser);
             let newImg = request.file;
             let houseBefore = await House.findById(request.params.id);
             let houseUpdate = await House.findByIdAndUpdate(request.params.id, {
+                owner: userId,
                 thumbnail:newImg.filename,
                 description,
                 location:{

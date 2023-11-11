@@ -65,6 +65,15 @@ class ControllerUsers {
             return response.send(`ERROR: ${err}`);
         }
     }
+
+    async deleteUser(request, response) {
+        try{
+            await User.findByIdAndDelete(request.params.id);
+            return response.send('User removed!');
+        }catch(err){
+            return response.send(`ERR:${err}`);
+        }
+    }
 }
 
 export default new ControllerUsers;
