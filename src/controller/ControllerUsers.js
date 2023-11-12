@@ -35,7 +35,6 @@ class ControllerUsers {
 
         try {
             let user = await User.findOne({ email }).exec();
-            console.log(user);
             if (!user) {
                 let userCreate = await User.create({
                     nickname,

@@ -7,10 +7,9 @@ import routerUsers from "./src/routes/routesUsers.js";
 import routerSessions from "./src/routes/routesSessions.js";
 import routerHouses from "./src/routes/routesHouses.js";
 import routerReservas from "./src/routes/routesReservas.js";
+import routerAlunos from "./src/routes/routesTests.js";
 
 const server = express();
-
-mongoose.connect("mongodb+srv://hmdev:9fME3ipnbD7WeEHB@cluster0.mioi2f8.mongodb.net/?retryWrites=true&w=majority");
 
 server.use('/files',
     express.static(path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'src', 'thumbnails'))
@@ -22,7 +21,8 @@ server.use(
     routerUsers,
     routerSessions,
     routerHouses,
-    routerReservas
+    routerReservas,
+    routerAlunos,
 );
 
 

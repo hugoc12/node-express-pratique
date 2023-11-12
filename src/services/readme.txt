@@ -1,0 +1,1 @@
+Acesso a serviços externos a aplicação, APIs

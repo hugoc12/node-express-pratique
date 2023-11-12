@@ -1,10 +1,13 @@
 import { Schema, model } from "mongoose";
+import dbtest from "../services/mongodb/connectDbtest.js";
 
 const UserSchema = new Schema({
     nickname:String,
     email:String,
     password:String,
     cellphone:String,
+},{
+    collection:'users'
 })
 
-export default model('User', UserSchema);
+export default dbtest.model('User', UserSchema);
