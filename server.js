@@ -1,13 +1,12 @@
-import express, { response } from "express";
-import mongoose from "mongoose";
+import express from "express";
 import path from 'node:path';
 import { fileURLToPath } from "node:url";
 
-import routerUsers from "./src/routes/routesUsers.js";
-import routerSessions from "./src/routes/routesSessions.js";
-import routerHouses from "./src/routes/routesHouses.js";
-import routerReservas from "./src/routes/routesReservas.js";
-import routerAlunos from "./src/routes/routesTests.js";
+import routerUsers from "./src/routes/routesUsers.js"; //dbtest
+import routerSessions from "./src/routes/routesSessions.js"; //dbtest
+import routerHouses from "./src/routes/routesHouses.js"; //dbtest
+import routerReservas from "./src/routes/routesReservas.js"; //dbtest
+import routerAlunos from "./src/routes/routesTests.js"; //dbhm
 
 const server = express();
 
