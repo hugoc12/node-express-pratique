@@ -19,7 +19,7 @@ class ControllerReservas{
             let house = await House.findById(idhouse);
 
             if(house.owner != iduser && house.status){ // SE A CASA NÃO PERTENCER AO USUÁRIO QUE DESEJA FAZER A RESERVA && ESTÁ DISPONÍVEL PARA RESERVA
-                await Reservas.create({
+                let reserve =  await Reservas.create({
                     idUser:iduser,
                     idHouse:idhouse
                 })
@@ -28,7 +28,7 @@ class ControllerReservas{
                     status:false // INDISPONIBILIZANDO CASA PARA RESERVA
                 })
 
-                return response.send('RESERVA REALIZADA!')
+                return response.json('RESERVA REALIZADA!')
             }else{
                 throw new Error('A casa pertence ao usuário ativo.')
             }

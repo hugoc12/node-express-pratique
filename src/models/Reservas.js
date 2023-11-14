@@ -2,8 +2,14 @@ import { Schema, model } from "mongoose";
 import dbtest from "../services/mongodb/connectDbtest.js";
 
 const ReservaSchema = new Schema({
-    idUser:String,
-    idHouse:String,
+    idUser:{
+        type:Schema.Types.ObjectId,
+        ref:'User'
+    },
+    idHouse:{
+        type:Schema.Types.ObjectId,
+        ref:'House'
+    },
 },{
     collection:'reservas'
 })

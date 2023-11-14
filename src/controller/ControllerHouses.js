@@ -5,10 +5,16 @@ class ControllerHouses {
     async index(request, response) {
         try {
             let idUser = request.headers.iduser;
-            let listHouses = (await House.find()).filter((el)=>{
-                return el.owner != idUser && el.status;
-            });
-            return response.json(listHouses);
+            if(request.query.myhouses == 'true'){
+                let listHouses = await House.find({owner:idUser});
+                return response.json(listHouses);
+            }else{
+                let listHouses = (await House.find({status:true})).filter((el)=>{
+                    return el.owner != idUser;
+                })//Listando casas que não pertencem ao usuário e estão disponíveis.
+                return response.json(listHouses);
+            }
+            
         } catch (err) {
             return response.send(`ERROR - ${err}`);
         }

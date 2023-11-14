@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import mongoose from "mongoose";
+import * as yup from 'yup';
 
 class ControllerUsers {
     async index(request, response) { // LISTAR TODOS OS USUÁRIOS
@@ -31,11 +32,23 @@ class ControllerUsers {
     }
 
     async store(request, response) { // ADICIONAR USUÁRIO
-        let { nickname, email, password, cellphone } = request.body;
-
         try {
+            let { nickname, email, password, cellphone } = request.body;
             let user = await User.findOne({ email }).exec();
             if (!user) {
+                let schemaValidation = yup.object().shape({
+                    nickname: yup.string().required(),
+                    email:yup.string().email('/^[^\s@]+@[^\s@]+\.[^\s@]+$/'),
+                    password:yup.string().required(),
+                    cellphone:yup.string().required()
+                })
+
+                await schemaValidation.isValid(request.body).then((mens)=>{
+                    if(!mens){
+                        throw new Error(`ERRO: ${mens}`)
+                    }
+                });
+
                 let userCreate = await User.create({
                     nickname,
                     email,
@@ -47,7 +60,7 @@ class ControllerUsers {
                 return response.send('Email de usuário já cadastrado.');
             }
         } catch (err) {
-            console.log(err);
+            return response.send('ERRO DE GRAVAÇÃO');
         }
     }
 
